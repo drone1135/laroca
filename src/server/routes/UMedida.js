@@ -3,10 +3,10 @@ const router=express.Router();
 const db=require('../modules/database/database');
 const bodyParser = require('body-parser');
 
-//retorna todos los rubros
-router.get('/rubro',(req,res)=>{
+//retorna todos las unidades de medidas
+router.get('/UMedida',(req,res)=>{
   
-    db.query('CALL Sp_GetRubros',(err,rows,fields)=>{
+    db.query('CALL Sp_GetUMedidas',(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
@@ -15,11 +15,11 @@ router.get('/rubro',(req,res)=>{
     }) ;
 }); 
 router.use(bodyParser.urlencoded({ extended: false }));
-//inserta un rubro
-router.post('/rubro',(req,res)=>{
+//inserta una unidad de medida
+router.post('/UMedida',(req,res)=>{
     let body=req.body;
     
-    db.query(`CALL Sp_AddRubro(${body.IDRubro},${body.Descripcion})`,(err,rows,fields)=>{
+    db.query(`CALL Sp_AddUMedida(${body.Descripcion})`,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
@@ -27,12 +27,12 @@ router.post('/rubro',(req,res)=>{
         }       
     }) ;
 });
-//actualiza un rubro
-router.put('/rubro/:IDRubro',(req,res)=>{
-    let id=req.params.IDRubro;
+//actualiza una unidad de medida
+router.put('/UMedida/:IDUMedida',(req,res)=>{
+    let id=req.params.IDUMedida;
     let body=req.body;
     
-    db.query(`CALL Sp_UpdateRubro(${id},${body.Descripcion})`,(err,rows,fields)=>{
+    db.query(`CALL Sp_UpUMedida(${id},${body.Descripcion})`,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
@@ -41,10 +41,10 @@ router.put('/rubro/:IDRubro',(req,res)=>{
     }) ;
 });
 //elimina un rubro
-router.delete('/rubro/:IDRubro',(req,res)=>{
-    let id=req.params.IDRubro;
+router.delete('/UMedida/:IDUMedida',(req,res)=>{
+    let id=req.params.IDUMedida;
    
-    db.query(`CALL Sp_DeleteRubro(${id})`,(err,rows,fields)=>{
+    db.query(`CALL Sp_DeleteUnidadMedida(${id})`,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
