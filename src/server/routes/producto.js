@@ -19,7 +19,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.post('/producto',(req,res)=>{
     let body=req.body;
    // console.log(body);
-    db.query(`CALL Sp_AddProducto(${body.Descripcion},${body.Precio},${body.CodArt},${body.IDRubro},${body.TipoCoccion})`,(err,rows,fields)=>{
+    db.query(`CALL Sp_AddProducto(${body.IDPrecioHistorico},${body.IDRubro},${body.Descripcion},${body.Precio},${body.CodArt},${body.TipoCoccion},${body.IDUnidadMedida})`,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
@@ -33,7 +33,7 @@ router.put('/producto/:IDProducto',(req,res)=>{
     let body=req.body;
     
    // console.log(id);
-    db.query(`CALL Sp_UpdateProducto(${id},${body.Descripcion},${body.Precio},${body.CodArt},${body.TipoCoccion},${body.IDRubro})`,(err,rows,fields)=>{
+    db.query(`CALL Sp_UpdateProducto(${id},${body.IDPrecioHistorico},${body.IDRubro},${body.Descripcion},${body.Precio},${body.CodArt},${body.TipoCoccion},${body.IDUnidadMedida})`,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{

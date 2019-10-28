@@ -8,7 +8,7 @@ router.get('/rubro',(req,res)=>{
   
     db.query('CALL Sp_GetRubros',(err,rows,fields)=>{
         if(!err){
-            res.json(rows);
+           return res.json(rows);
         }else{
             console.log(err);
         }       
@@ -19,9 +19,9 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.post('/rubro',(req,res)=>{
     let body=req.body;
     
-    db.query(`CALL Sp_AddRubro(${body.IDRubro},${body.Descripcion})`,(err,rows,fields)=>{
+    db.query(`CALL Sp_AddRubro(${body.Descripcion})`,(err,rows,fields)=>{
         if(!err){
-            res.json(rows);
+            res.json({rows});
         }else{
             console.log(err);
         }       

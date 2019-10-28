@@ -6,4 +6,5 @@ app.get('/',(req,res)=>{
 app.use(require('./rubro'));
 app.use(require('./UMedida'));
 app.use(require('./producto'));
+app.use(require('./cliente'));
 module.exports = app;
